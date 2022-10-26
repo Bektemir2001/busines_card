@@ -1,0 +1,451 @@
+swagger: '2.0'
+info:
+  description: LPT APis
+  version: 1.0.0
+  title: LPT Frontend API's
+basePath: /api/
+tags:
+  - name: Salam
+    description: Manage Salam
+
+paths:
+  /users:
+    get:
+      tags:
+        - User
+      summary: Manage Users
+      description: 'Manage your users with this api'
+      operationId: users
+      consumes:
+        - application-json
+      produces:
+        - application-json
+      responses:
+        '200':
+          description: successful operation
+        '400':
+          description: Bad request
+  /users/activate:
+    post:
+      tags:
+        - User Api
+      summary: Activate User
+      description: 'Activate User and get user with token'
+      operationId: createUser
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: query
+          name: email
+          type: string
+          required: true
+        - in: query
+          name: password
+          type: string
+          required: true  
+      responses:
+        '200':
+          description: successful operation
+        '400':
+          description: Bad request
+  /users/{user}/update:
+    post:
+      tags:
+      - User Api
+      summary: Update User
+      description: 'update users data'
+      operationId: updateUser
+      consumes:
+        - multipart/form-data
+      produces:
+        - application-json
+      responses:
+        '200':
+          description: successful operation
+        '400':
+          description: Bad request
+      parameters:
+        - name: user
+          in: path
+          description: User ID
+          required: true
+          schema:
+            type: integer
+            format: int64
+        - in: formData
+          name: token
+          type: string
+          required: true
+        - in: formData
+          name: first_name
+          type: string
+          required: false
+        - in: formData
+          name: last_name
+          type: string
+          required: false
+        - in: formData
+          name: email
+          type: string
+          required: false
+        - in: formData
+          name: image
+          type: file
+          required: false
+        - in: formData
+          name: logo
+          type: file
+          required: false
+        - in: formData
+          name: subject
+          type: string
+          required: false
+        - in: formData
+          name: description
+          type: text
+          required: false 
+        - in: formData
+          name: phone_number
+          type: string
+          required: false
+        - in: formData
+          name: link_to_instagram
+          type: string
+          required: false
+        - in: formData
+          name: link_to_facebook
+          type: string
+          required: false
+        - in: formData
+          name: link_to_tiktok
+          type: string
+          required: false
+        - in: formData
+          name: link_to_whatsapp
+          type: string
+          required: false
+        - in: formData
+          name: link_to_youtube
+          type: string
+          required: false
+        - in: formData
+          name: link_to_linkedin
+          type: string
+          required: false
+        - in: formData
+          name: link_to_telegram
+          type: string
+          required: false
+        - in: formData
+          name: address
+          type: string
+          required: false
+  /users/{user}:
+    get:
+      tags:
+        - User Api
+      summary: Manage Users
+      description: 'get users data'
+      operationId: user
+      consumes:
+        - application-json
+      produces:
+        - application-json
+      responses:
+        '200':
+          description: successful operation
+        '400':
+          description: Bad request
+      parameters:
+        - name: user
+          in: path
+          description: User ID
+          required: true
+          schema:
+            type: integer
+            format: int64
+  /time/{user}/setTime:
+    post:
+      tags:
+        - Working Time
+      summary: Set Time
+      description: 'set time for a work'
+      operationId: setTime
+      consumes:
+        - application-json
+      produces:
+        - application-json
+      responses:
+        '200':
+          description: successful operation
+        '400':
+          description: Bad request
+      parameters:
+        - name: user
+          in: path
+          description: User ID
+          required: true
+          schema:
+            type: integer
+            format: int64
+        - in: query
+          name: token
+          type: string
+          required: true
+        - in: query
+          name: time
+          type: string
+          required: true
+  /time/{time}/deleteTime:
+    delete:
+      tags:
+        - Working Time
+      summary: Delete Time
+      description: 'delete time for'
+      operationId: deleteTime
+      consumes:
+        - application-json
+      produces:
+        - application-json
+      responses:
+        '200':
+          description: successful operation
+        '400':
+          description: Bad request
+      parameters:
+        - name: time
+          in: path
+          description: Time ID
+          required: true
+          schema:
+            type: integer
+            format: int64
+        - in: query
+          name: token
+          type: string
+          required: true
+  /time/{user}/getTime:
+    get:
+      tags:
+        - Working Time
+      summary: Delete Time
+      description: 'get all working times for an admin'
+      operationId: getWorkingTime
+      consumes:
+        - application-json
+      produces:
+        - application-json
+      responses:
+        '200':
+          description: successful operation
+        '400':
+          description: Bad request
+      parameters:
+        - name: user
+          in: path
+          description: user ID
+          required: true
+          schema:
+            type: integer
+            format: int64
+        - in: query
+          name: token
+          type: string
+          required: true
+  /booking/{user}:
+    post:
+      tags:
+        - Booking
+      summary: Booking
+      description: 'booking'
+      operationId: booking
+      consumes:
+        - application-json
+      produces:
+        - application-json
+      responses:
+        '200':
+          description: successful operation
+        '400':
+          description: Bad request
+      parameters:
+        - name: user
+          in: path
+          description: User ID
+          required: true
+          schema:
+            type: integer
+            format: int64
+        - in: query
+          name: time_id
+          type: integer
+          required: true
+        - in: query
+          name: name
+          type: string
+          required: true
+        - in: query
+          name: phone_number
+          type: string
+          required: true
+        - in: query
+          name: date
+          type: string
+          required: true
+  /booking/{user}/getTime:
+    get:
+      tags:
+        - Booking
+      summary: get times
+      description: 'get times which user can booking'
+      operationId: getTimes
+      consumes:
+        - application-json
+      produces:
+        - application-json
+      responses:
+        '200':
+          description: successful operation
+        '400':
+          description: Bad request
+      parameters:
+        - name: user
+          in: path
+          description: User ID
+          required: true
+          schema:
+            type: integer
+            format: int64
+  /booking/{user}/getBooks:
+    get:
+      tags:
+        - Booking
+      summary: get books
+      description: 'get all books for admin. The user who can get all books must be an admin'
+      operationId: getBooks
+      consumes:
+        - application-json
+      produces:
+        - application-json
+      responses:
+        '200':
+          description: successful operation
+        '400':
+          description: Bad request
+      parameters:
+        - name: user
+          in: path
+          description: User ID
+          required: true
+          schema:
+            type: integer
+            format: int64
+        - in: query
+          name: token
+          type: string
+          required: true
+  /booking/{user}/deleteBooks:
+    delete:
+      tags:
+        - Booking
+      summary: delete books
+      description: 'delete all books. The user who can delete all books must be an admin!!'
+      operationId: deleteBooks
+      consumes:
+        - application-json
+      produces:
+        - application-json
+      responses:
+        '200':
+          description: successful operation
+        '400':
+          description: Bad request
+      parameters:
+        - name: user
+          in: path
+          description: User ID
+          required: true
+          schema:
+            type: integer
+            format: int64
+        - in: query
+          name: token
+          type: string
+          required: true
+  /booking/{user}/{book}/changeStatus:
+    patch:
+      tags:
+        - Booking
+      summary: change status
+      description: 'change Status. The user who can change books status must be an admin!!'
+      operationId: changeStatus
+      consumes:
+        - application-json
+      produces:
+        - application-json
+      responses:
+        '200':
+          description: successful operation
+        '400':
+          description: Bad request
+      parameters:
+        - name: user
+          in: path
+          description: user ID
+          required: true
+          schema:
+            type: integer
+            format: int64
+        - name: book
+          in: path
+          description: Booking ID
+          required: true
+          schema:
+            type: integer
+            format: int64
+        - in: query
+          name: token
+          type: string
+          required: true
+  /booking/{user}/{book}/deleteBook:
+    patch:
+      tags:
+        - Booking
+      summary: delete book
+      description: 'delete Book. The user who can delete books status must be an admin!!'
+      operationId: deleteBook
+      consumes:
+        - application-json
+      produces:
+        - application-json
+      responses:
+        '200':
+          description: successful operation
+        '400':
+          description: Bad request
+      parameters:
+        - name: user
+          in: path
+          description: user ID
+          required: true
+          schema:
+            type: integer
+            format: int64
+        - name: book
+          in: path
+          description: Booking ID
+          required: true
+          schema:
+            type: integer
+            format: int64
+        - in: query
+          name: token
+          type: string
+          required: true
+
+
+
+
+
